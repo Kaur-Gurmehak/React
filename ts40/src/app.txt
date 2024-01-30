@@ -1,0 +1,108 @@
+import React, { useReducer } from 'react'
+import {useState,useEffect} from 'react'
+
+const reducerFunction=(state,action)=>{
+  console.log(state,action)
+  if (action.type === "one"){
+    return {count:state.count+1}
+  }
+  else if(action.type === "two"){
+    return {count:state.count+2}
+  }
+  else if (action.type === "three"){
+    return{count:state.count+3}
+  }
+  return state;
+}
+function App() {
+ // const [count,setCount]=useState(0)
+ const [state,dispatch]=useReducer(reducerFunction,{count:0})
+  return (
+    <div>
+      <h1>{state.count}</h1>
+      <button onClick={()=>dispatch({type:"one"})}>+1</button>
+      <button onClick={()=>dispatch({type:"two"})}>+2</button>
+      <button onClick={()=>dispatch({type:"three"})}>+3</button>
+    </div>
+  )
+}
+
+export default App
+import { FC } from 'react';
+import './About.tsx';
+import './style.css';
+
+export const App: FC<{ name: string }> = ({ name }) => {
+  return (
+    <div>
+      <About/>
+      <h1>Hello {name}!</h1>
+    </div>
+  );
+};
+
+import React from 'react'
+import './Contact.tsx';
+
+function About() {
+  return (
+    <div>
+      <h1>About component</h1>
+      <Contact/>
+    </div>
+  )
+}
+
+export default About
+
+import React from 'react'
+
+function Contact() {
+  return (
+    <div>
+      <h1>Contact component</h1>
+      <Blog/>
+    </div>
+  )
+}
+
+export default Contact
+
+import React from 'react'
+
+function Blog() {
+  return (
+    <div>
+      <h1>Blog component</h1>
+    </div>
+  )
+}
+
+export default Blog
+
+
+import React, { useState } from 'react'
+import "./App.css"
+import Themechanger from './components/Themechanger';
+import Conditionalrendering from './components/Conditionalrendering';
+export default function App() {
+  const [condition,setCondition] = useState(true);
+  
+  function handleColor(){
+    setCondition(!condition)
+  }
+  return (
+    <>
+    <div className={condition?"active":"not-active"} style={{backgroundColor:condition?"white":"black",color:condition?"black":"white"}}>
+      <h1>Hello World!</h1>
+      <button onClick={()=>(handleColor())}>{condition?"Dark":"Light"}</button>
+      <Themechanger/>
+      {-10 && (
+        <h1>Hello Adfar</h1>
+      )}
+    </div>
+    <Conditionalrendering/>
+    </>
+    
+  )
+}
